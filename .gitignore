@@ -1,0 +1,14 @@
+plots/*
+mat/*
+doc/*
+help/*
+bin/*
+lib/*
+RefAgate/*
+RefDFR/*
+*/*.o
+*/*~
+*/*.mex*
+*/*.mat
+vcsln/*/x64
+vcsln/*/*/x64
