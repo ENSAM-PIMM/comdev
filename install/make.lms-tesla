@@ -1,0 +1,11 @@
+CPP=icc
+
+MKL_LIBRARY_PATH=/opt/intel/mkl/lib/intel64
+TBB_LIBRARY_PATH=/opt/intel/tbb/lib/intel64/cc4.1.0_libc2.4_kernel2.6.16.21
+
+MKL_INCLUDE_PATH =/opt/intel/mkl/include
+TBB_INCLUDE_PATH =/opt/intel/tbb/include
+OMP_LIBRARY_PATH = /n/APP/intel/composerxe-2011.0.084/compiler/lib/intel64
+
+DIROUT=../m/64
+

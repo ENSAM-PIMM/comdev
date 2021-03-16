@@ -1,0 +1,33 @@
+#########################################################
+# Linux                                                 #
+#########################################################
+FC        = g77
+FFLAGS    = -O3 -g -fno-second-underscore -Wall
+CC        = gcc
+CFLAGS    = -O3 -g -D_POSIX_C_SOURCE=199506L -Wall -std=iso9899:199409 -pedantic -Isrc
+LD        = $(CC) $(CFLAGS)
+LDFLAGS   = 
+RM        = rm
+AR        = ar cr 
+RANLIB    = ranlib
+INCDIRS   = 
+EXPFILES  = 
+
+BLASLIB   = -lblas 
+BLASLIB   = -L $(HOME)/lib -lf77blas -lcblas -latlas 
+
+LAPACKLIB = $(HOME)/lib/lapack_linux.a
+
+METISLIB  = -L $(HOME)/lib -lmetis 
+
+OTHERLIBS = -lg2c -lm
+
+DEFINES   = 
+
+
+
+
+
+
+
+

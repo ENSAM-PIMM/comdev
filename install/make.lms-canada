@@ -1,0 +1,16 @@
+
+#MKL_LIBRARY_PATH=/n/APP/intel/Compiler/11.0/083/mkl/lib/em64t
+#TBB_LIBRARY_PATH=/n/APP/intel/Compiler/11.0/083/tbb/lib/em64t
+#MKL_INCLUDE_PATH =/n/APP/intel/Compiler/11.0/083/mkl/include
+#TBB_INCLUDE_PATH =/n/APP/intel/Compiler/11.0/083/tbb/include
+
+MKL_LIBRARY_PATH=/n/APP/intel/composerxe-2011/mkl/lib/intel64
+TBB_LIBRARY_PATH=/n/APP/intel/composerxe-2011/tbb/lib/intel64/cc4.1.0_libc2.4_kernel2.6.16.21
+OMP_LIBRARY_PATH = /n/APP/intel/composerxe-2011.0.084/compiler/lib/intel64
+
+MKL_INCLUDE_PATH =/n/APP/intel/composerxe-2011/mkl/include
+TBB_INCLUDE_PATH =/n/APP/intel/composerxe-2011/tbb/include
+
+CPP=g++
+
+DIROUT=/n/distrib/lib/mklserv/64

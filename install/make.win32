@@ -1,0 +1,34 @@
+#########################################################
+# WIN32                                                 #
+#########################################################
+FC        = ignore
+FFLAGS    = -O3 -g -fno-second-underscore -Wall
+CC        = cl
+CFLAGS    = /nologo /O2 /W3 /GX /D "WIN32" -MT -DNOAMD -DNOMMD -DSDTOOLS -DNOCOLAMD
+LD        = $(CC) $(CFLAGS)
+LDFLAGS   = /link /NODEFAULTLIB
+LDFLAGS   = 
+RM        = del
+AR        = lib /nologo /out:
+RANLIB    = echo
+INCDIRS   = 
+EXPFILES  = 
+
+BLASLIB   = ..\..\MATLAB6p1\extern\lib\win32\microsoft\msvc60\libmwlapack.lib
+
+LAPACKLIB = ..\..\MATLAB6p1\extern\lib\win32\microsoft\msvc60\libmwlapack.lib
+
+METISLIB  = libmetis.a
+
+OTHERLIBS = ..\..\Tools\Win32\libf2c\vcf2c.lib
+
+DEFINES   = 
+
+MEMTEST = no
+
+
+
+
+
+
+
