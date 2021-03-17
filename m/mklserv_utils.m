@@ -496,7 +496,11 @@ if any(RO.mtype==[11 13]);%11 real non-sym, 13 cpx non sym
       sp_util('setinput',r1.param,[13 1],zeros(1)+9); %r1.param(1+[9:10])%pivot,scaling
       %sp_util('setinput',r1.param,1,-zeros(1)+12); %iparm(1+12) improved acc
 elseif RO.mtype==6;
-      k=tril(k); if isreal(k);k=complex(k);method.param.isreal=0; end
+      k=tril(k); 
+      if ~isreal(k)
+      elseif sdtdef('verm')>900; k=complex(k);method.param.isreal=0; 
+      else; RO.mtype=-2;
+      end
       sp_util('setinput',r1.param,13,zeros(1)+9); 
 elseif any(RO.mtype==[1 -2 2 6]);
       k=feval(ofact('@check_k'),k);
