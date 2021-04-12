@@ -514,8 +514,8 @@ for j1=1:length(st)
 end
 if ~isfield(RO,'msglvl');RO.msglvl=0;end
 if isfield(RO,'silent')&&RO.silent; 
-    sp_util('setinput',r1.param,double(~RO.silent),66); 
-    sp_util('setinput',method.param.param,double(~RO.silent),66); 
+    sp_util('setinput',r1.param,double(~RO.silent),ones(1)*66); 
+    sp_util('setinput',method.param.param,double(~RO.silent),ones(1)*66); 
 end
 ite=2; mklserv_utils('serv lpstart');% check server started
 
