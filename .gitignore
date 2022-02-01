@@ -12,3 +12,4 @@ RefDFR/*
 */*.mat
 vcsln/*/x64
 vcsln/*/*/x64
+*.bak

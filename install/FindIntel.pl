@@ -92,14 +92,14 @@ if ((-d "d:\\APP\\win64\\intelxxx") ) {  # elan/canada
  #$MklLib="d:\\APP\\intel\\mkl\\9.1.021\\em64t\\lib";
  #$MklInc="d:\\APP\\intel\\mkl\\9.1.021\\include";
  $Lroot="C:\\Program Files (x86)\\Intel\\Composer XE 2011 SP1";
- $Lroot="C:\\APP\\Intel\\compilers_and_libraries_2019\\windows";
- $TbbInc="C:\\APP\\Intel\\Composer XE 2011 SP1\\tbb\\include";
+ $Lroot="C:\\APP\\Intel";
+ $TbbInc="C:\\APP\\Intel\\tbb\\include";
  $MklL=" -lmkl_intel_lp64 -lmkl_tbb_thread -lmkl_core -ltbb ";
  #$TbbLib="$Lroot\\tbb\\lib\\intel64\\vc8";
- $TbbLib="$Lroot\\tbb\\lib\\intel64\\vc_mt";
- $MklInc="$Lroot\\mkl\\include";
- $MklLib="$Lroot\\mkl\\lib\\intel64";
- $OmpLib="d:\\APP\\win64\\M97\\bin\\win64";
+ $TbbLib="$Lroot\\tbb\\latest\\lib\\intel64\\vc_mt";
+ $MklInc="$Lroot\\mkl\\latest\\include";
+ $MklLib="$Lroot\\mkl\\latest\\lib\\intel64";
+ $OmpLib="d:\\APP\\win64\\M98\\bin\\win64";
 }
 
 if  ((/mexw32/)) {  # Configure the output directories
