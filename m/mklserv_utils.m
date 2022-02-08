@@ -429,7 +429,7 @@ elseif comstr(Cam,'oprop');[CAM,Cam]=comstr(CAM,6);
  if ~isempty(Cam);out=out{strcmpi(out(:,1),CAM),2};end
 %% #cvs
 elseif comstr(Cam,'cvs')
- out=sdtcheck('revision','$Revision: 1a96621 $  $Date: 2021-04-12 19:04:30 +0200 $ ');
+ out=sdtcheck('revision','$Revision: 86c7445 $  $Date: 2021-04-26 17:11:55 +0200 $ ');
 elseif comstr(Cam,'@'); out=eval(CAM);
 else; error('%s unknown',CAM);
 end % - - - - - - - - - - - - - - - - - - - - - -
