@@ -622,14 +622,16 @@ function out=mklserv_csolve(b,ty,method) %#ok<DEFNU>
 
 %% missing solveInPlace 
 if ischar(b);eval(iigui(b,'MoveFromCaller'));end;b=full(b);
-if isreal(b); b=complex(b); end; out=complex(b+0); 
-mklserv_client('ssov',double(ty(2)),b,out);
-%ret=mklserv_client('setf',{'local',0},ty(2));
-%ret=mklserv_client('setb',{'local',0},b);
-%ret=mklserv_client('solr',{'local',0});
-%if ret~=2; error('delay issue in mkl_serv_call'); end
-%[ret,out]=mklserv_client('getx',{'local',0});
-
+if isa(b,'omat'); out=mklserv_solve(b,ty,method);
+else
+ if isreal(b); b=complex(b); end; out=complex(b+0);
+ mklserv_client('ssov',double(ty(2)),b,out);
+ %ret=mklserv_client('setf',{'local',0},ty(2));
+ %ret=mklserv_client('setb',{'local',0},b);
+ %ret=mklserv_client('solr',{'local',0});
+ %if ret~=2; error('delay issue in mkl_serv_call'); end
+ %[ret,out]=mklserv_client('getx',{'local',0});
+end
 end
 
 
@@ -645,6 +647,7 @@ if 1==2 % ~isempty(method.TktSolve); actuall dont in ofact/mldivide
   mklserv_client('ssov',ty(2),b,o1);
   out=zeros(ty(7),size(b,2));out(method.TktSolve,:)=o1;
  end
+elseif isa(b,'omat'); out=mklserv_solve(b,ty,method);
 elseif ~isreal(b); 
  bi=imag(b); oi=zeros(size(b)); mklserv_client('ssov',ty(2),b,oi);
  b=real(b); or=zeros(size(b)); mklserv_client('ssov',ty(2),b,or);
