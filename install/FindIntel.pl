@@ -76,7 +76,7 @@ if (/mexa64/) { #elan2/canada3
 #   $OmpLib="/o/balmes/sdt.cur/mklserv/64";
 # }
 #}
-if ((-d "d:\\APP\\win64\\intelxxx") ) {  # elan/canada  
+if ((-d "d:\\APP\\win64\\intelx") ) {  # elan/canada  
  $Lroot="D:\\APP\\win64\\intel\\compilers_and_libraries_2017\\windows";
  $TbbInc= "$Lroot\\tbb\\include";
  $TbbLib="$Lroot\\tbb\\lib\\intel64\\vc10";
@@ -96,6 +96,9 @@ if ((-d "d:\\APP\\win64\\intelxxx") ) {  # elan/canada
  $TbbInc="C:\\APP\\Intel\\tbb\\include";
  $MklL=" -lmkl_intel_lp64 -lmkl_tbb_thread -lmkl_core -ltbb ";
  #$TbbLib="$Lroot\\tbb\\lib\\intel64\\vc8";
+ # mklink /d mkl compilers_and_libraries_2019\windows\mkl
+ # mklink /d  latest ../tbb
+ # mklink /d  latest ../mkl
  $TbbLib="$Lroot\\tbb\\latest\\lib\\intel64\\vc_mt";
  $MklInc="$Lroot\\mkl\\latest\\include";
  $MklLib="$Lroot\\mkl\\latest\\lib\\intel64";
