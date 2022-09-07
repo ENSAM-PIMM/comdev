@@ -2,21 +2,18 @@ function out=mklserv_utils(varargin);
 
 
 % Gateway function for inclusion of MKL server into the 
-% OpenFEM ofact object
+% OpenFEM ofact object. Install using sdtcheck(''patchMkl'')
 %
 %  mklserv_utils('defparam') % returns default parameters 
 % set default IP and port
 %     a=mklserv_utils('serv');setpref('SDT','MklServ',a.Serv) 
-%
-% See setup with mklserv_utils('setup')
-%     setpref('SDT','MklServPath','yourdir') can be used to set server location
-%     to something other than default $SDT/mklserv/64
 %
 %   ki=ofact(kd,'method','mklserv_utils','mtype',11);
 %   oProp={'method','mklserv_utils','mtype',13,'silent',1};kd=ofact(speye(3)*(1+1i),oProp{:})
 %    mklserv_utils('mtype') % for type list
 % - For large RHS buffering use 
 %    setpref('SDT','MklServBufSize',1) % can be used for B buffering in GB
+
 % - To close your server : mklserv_utils('clear')
 % - Low level check of start options (without starting)
 %    a=mklserv_utils('servBack')
@@ -24,7 +21,8 @@ function out=mklserv_utils(varargin);
 %   mklserv_client('pidg',{'127.0.0.1'    [1707]})
 %   mklserv_client('loca',{0,0}) % Recent test that mex is local
 
-% Copyright (c) 2010-2020 Etienne Balmes, Illoul Amran, Guillaume Vermot des Roches
+% Etienne Balmes, Illoul Amran, Guillaume Vermot des Roches
+% Copyright (c) 2010-2022 by SDTools and ENSAM
 % For revision information see mklserv_utils('cvs')
 
 %#ok<*NOSEM,*NASGU,*ASGLU>
