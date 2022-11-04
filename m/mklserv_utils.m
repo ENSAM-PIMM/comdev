@@ -416,7 +416,7 @@ elseif comstr(Cam,'oprop');[CAM,Cam]=comstr(CAM,6);
  out={ ...
  'RealSym',{'method','mklserv_utils','mtype',1,'silent',1}
  'RealPosSym',{'method','mklserv_utils','mtype',2,'silent',1}
- 'RealUndefSym',{'method','mklserv_utils','mtype',2,'silent',1}
+ 'RealUndefSym',{'method','mklserv_utils','mtype',-2,'silent',1}
  'RealNonsym',{'method','mklserv_utils','mtype',11,'silent',1}
  'CpxSym',{'method','mklserv_utils','mtype',6,'silent',1}
  'CpxNonSym',{'method','mklserv_utils','mtype',13,'silent',1}
