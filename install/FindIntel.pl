@@ -43,13 +43,13 @@ if ((-d "/opt/intel/tbb")) {
 }
 
 if (/mexa64/) { #elan2/canada3
- $TbbInc="/opt/intel/compilers_and_libraries_2017/linux/tbb/include";
+ $TbbInc="/opt/intel/linux/tbb/include";
  if (-d "/opt/intel/compilers_and_libraries_2020") {
-  $TbbRoot="/opt/intel/compilers_and_libraries_2020/linux/tbb";
-  $MklRoot="/opt/intel/compilers_and_libraries_2020/linux/mkl";
+  $TbbRoot="/opt/intel/tbb";
+  $MklRoot="/opt/intel/mkl";
  } else {
-  $TbbRoot="/opt/intel/compilers_and_libraries_2017/linux/tbb";
-  $MklRoot="/opt/intel/compilers_and_libraries_2017/linux/mkl";
+  $TbbRoot="/opt/intel/tbb";
+  $MklRoot="/opt/intel/mkl";
  }
  if (-d "/opt/intel/clck") {
   $OmpLib="/opt/intel/clck/2017.1.016/provider/share/common/lib/intel64";
