@@ -486,6 +486,7 @@ end
 method.param.isreal=isreal(k);
 if isfield(RO,'mtype')
 elseif ~isreal(k); RO.mtype=6;% Assume symmetric complex 
+  if sdtdef('verm')<904;error('Not implemented use spfmex or Matlab>=904');end
 else;  RO.mtype=-2;% assume symmetric indefinite real 
 end
 if any(RO.mtype==[11 13]);%11 real non-sym, 13 cpx non sym
