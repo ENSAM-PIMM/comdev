@@ -43,7 +43,8 @@ if ((-d "/opt/intel/tbb")) {
 }
 
 if (/mexa64/) { #elan2/canada3
- $TbbInc="/opt/intel/linux/tbb/include";
+    #$TbbInc="/opt/intel/linux/tbb/include";
+    $TbbInc="/opt/intel/tbb/include/tbb";
  if (-d "/opt/intel/compilers_and_libraries_2020") {
   $TbbRoot="/opt/intel/tbb";
   $MklRoot="/opt/intel/mkl";
@@ -131,7 +132,8 @@ if (defined($TbbRoot)) {
  if (!(-d $TbbLib)) {$TbbLib="$TbbRoot/lib"; }
  if ($HOST =~/lms-elan2/) {$TbbLib="$TbbRoot/lib/intel64/gcc4.1"}
  elsif (($HOST =~/canada/) || ($HOST =~/lms-elan/)) {
-   $TbbLib="$TbbRoot/lib/intel64/gcc4.8"}
+     $TbbLib="$TbbRoot/lib/intel64/gcc4.8"}
+     if (!(-d $TbbLib)) {$TbbLib="$TbbRoot/lib/intel64/gcc4.7"}
  elsif (!(-f "$TbbLib/libtbb.so")) {
     $T2="$TbbLib/cc3.4.3_libc2.3.4_kernel2.6.9"; 
    if ((-f "$T2")) {$TbbLib=$T2;}
