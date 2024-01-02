@@ -22,7 +22,7 @@ function out=mklserv_utils(varargin);
 %   mklserv_client('loca',{0,0}) % Recent test that mex is local
 
 % Etienne Balmes, Illoul Amran, Guillaume Vermot des Roches
-% Copyright (c) 2010-2022 by SDTools and ENSAM
+% Copyright (c) 2010-2024 by SDTools and ENSAM
 % For revision information see mklserv_utils('cvs')
 
 %#ok<*NOSEM,*NASGU,*ASGLU>
@@ -477,7 +477,10 @@ if r3(1)>0  %if ~isempty(getenv('MKL_PARDISO_OOC_MAX_CORE_SIZE'))
  setenv('MKL_PARDISO_OOC_KEEP_FILE','1')
  r1.param(60)=r3(1); % xxx
 end
- 
+%r1.param([11 13 34 2 24 25 3])=[1 2 1 2 1 1 24];% check identical results
+%r1.param([34 2 24 25 3])=[ 1 2 1 1 24];% check identical results
+%r1.param([2 8])=[0 15]
+
 RO=struct(varargin{:});
 if isfield(RO,'MoveFromCaller')&&RO.MoveFromCaller
  k1=inputname(1); 
