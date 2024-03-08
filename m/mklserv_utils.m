@@ -486,7 +486,7 @@ if isfield(RO,'MoveFromCaller')&&RO.MoveFromCaller
  k1=inputname(1); 
  if ~isempty(k1); evalin('caller',sprintf('clear %s',k1)); end
 end
-method.param.isreal=isreal(k);
+method.param.isreal=isreal(k);if ~issparse(k);k=sparse(k);end
 if isfield(RO,'mtype')
 elseif ~isreal(k); RO.mtype=6;% Assume symmetric complex 
   if sdtdef('verm')<904;error('Not implemented use spfmex or Matlab>=904');end
