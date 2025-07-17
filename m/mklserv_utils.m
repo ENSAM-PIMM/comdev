@@ -342,16 +342,18 @@ elseif comstr(Cam,'defparam')
  r1=[];
  if carg<=nargin
    param=varargin{carg};carg=carg+1;
-   r1=struct;for j1=1:64;r1.(sprintf('i%i',j1))=param(j1);end
+   if isfield(param,'param');param=param.param;end
+   r1=struct;for j1=1:64;r1.(sprintf('i%02i',j1))=param(j1);end
    st={'maxfact','mnum','msglvl','error','t1','t2','t3'};
    for j2=1:length(st);r1.(st{j2})=param(64+j2);end
  end
-a=['i1(0#%g#"UseDef") i2(2#%g#"MMD(1),Metis,OMPMMD")' ...
-  'i3(0#%g#"") i4(0#%g#"CGS")' ...
-  'i5(0#%g#"Reuse fill-in") i6(0#%g#"Overwrite F")' ...
-  'i7(0#%g#"Niter_out") i8(0#%g#"Refine_Step")' ...
-  'i9(0#%g#"Unused") i10(13#%g#"Pivoting sym 13 nsym 8")' ...
-  'i11(0#%g#"scale : 1 ty 11,13 0:ty -2 -4 6") i12(0#%g#"")' ...
+% shifted iparam[0]=i1
+a=['i01(0#%g#"UseDef") i02(2#%g#"MMD(1),Metis(2),OMPMMD(3)")' ...
+  'i03(0#%g#"") i04(0#%g#"CGS")' ...
+  'i05(0#%g#"Reuse fill-in") i06(0#%g#"Overwrite F")' ...
+  'i07(0#%g#"Niter_out") i08(0#%g#"Refine_Step")' ...
+  'i09(0#%g#"Unused") i10(13#%g#"Pivoting sym 13 nsym 8")' ...
+  'i11(0#%g#"scale : 1 ty 11,13 0:ty -2 -4 6") i12(0#%g#"solve transpose")' ...
   'i13(0#%g#"weigth: 1 ty 11,13 0:ty -2 -4 6") i14(0#%g#"N perturbed pivots")' ...
   'i15(0#%g#"peak symbfact") i16(0#%g#"perm symbfact")' ...
   'i17(0#%g#"mem fact") i18(-1#%g#"nnz_fact")' ...
@@ -367,10 +369,8 @@ a=['i1(0#%g#"UseDef") i2(2#%g#"MMD(1),Metis,OMPMMD")' ...
   't1(0#%g#"T_sym_fact") t2(0#%g#"T_num_fact") t3(0#%g#"T_solve")' ...
   ];
  if isempty(r1);b=cingui('paramedit -DoClean',a);
- else;b=cingui('paramedit',a,r1);
-  b=fe_def('cleanentry cell',b);b(cellfun('isempty',b(:,3)),:)=[];
-  b{end-2,2}=b{end-2,2}*1000;b{end-1,2}=b{end-1,2}*1000;b{end,2}=b{end,2}*1000;
-  b=b';fprintf('%8s %4.0f :  %s\n',b{:})
+ else;
+  b=cingui('paramedit -doClean2',a,r1); disp(b)
   return
  end
  
@@ -494,7 +494,8 @@ else;  RO.mtype=-2;% assume symmetric indefinite real
 end
 if any(RO.mtype==[11 13]);%11 real non-sym, 13 cpx non sym
       k=k.'; if isreal(k);RO.mtype=11;end
-      sp_util('setinput',r1.param,[13 1],zeros(1)+9); %r1.param(1+[9:10])%pivot,scaling
+      if ~isfield(RO,'j9');RO.j9=13;RO.j10=1; end % pivoting scaling j9=i0
+      %sp_util('setinput',r1.param,[13 1],zeros(1)+9); %r1.param(1+[9:10])%pivot,scaling
       %sp_util('setinput',r1.param,1,-zeros(1)+12); %iparm(1+12) improved acc
 elseif RO.mtype==6;
       k=tril(k); 
@@ -509,8 +510,13 @@ elseif any(RO.mtype==[1 -2 2 6]);
       if RO.mtype==-2;  sp_util('setinput',r1.param,1,zeros(1)+55); end% iparam55=[1] to get pivot
 end
 st=fieldnames(RO);st(~strncmpi(st,'i',1))=[];
+for j1=1:length(st) % i one base indexing
+  sp_util('setinput',r1.param, ... % i10=13,i12=1
+      double(RO.(st{j1})),zeros(1)+sscanf(st{j1}(2:end),'%i'));
+end
+st=fieldnames(RO);st(~strncmpi(st,'j',1))=[]; % Zero based indexing
 for j1=1:length(st)
-  sp_util('setinput',r1.param, ... % i9=13,i12=1
+  sp_util('setinput',r1.param, ... % j9=13
       double(RO.(st{j1})),zeros(1)+sscanf(st{j1}(2:end),'%i'));
 end
 if ~isfield(RO,'msglvl');RO.msglvl=0;end
@@ -594,7 +600,7 @@ else % remote implement
  end
  if RO.msglvl;mklserv_client('sout',serv);end
 end
-if r1.param(67);
+if r1.param(67)||RO.msglvl
     [a,b]=mklserv_client('geti',serv);%,r1.param);
     fprintf('Fact : %i %i ms, npiv=%i,Mem%i kb\n',b(69:70)*1000,b(14:15))
     if r1.param(67)==2; ret=mklserv_client('setp',serv,[66 0]); end%
