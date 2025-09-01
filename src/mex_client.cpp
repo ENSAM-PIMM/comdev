@@ -105,6 +105,8 @@ void mexFunction(int nlhs, mxArray *plhs[],
     - mklserv_client('sout',serv) get string output \n\
     - mklserv_client('quit',serv) stop the server\n");
         return;
+    } else if (!strcmp("thre",commande)) {
+        mkl_domain_set_num_threads((int)prhs[1],MKL_DOMAIN_PARDISO);
     } else if  (!strcmp("cvs",commande))  {
       plhs[0]=mxCreateString("$Revision: 145 $  $Date: 2020-05-22 15:34:28 +0200 (Fri, 22 May 2020) $");
       return;

@@ -5,6 +5,7 @@
 #endif
 
 //#include "comutile.h"
+#include "mkl.h"
 #include "c_pardiso.h" 
 #include <vector>
 
@@ -141,7 +142,10 @@ void mexFunction(int nlhs, mxArray *plhs[],
     }
     
 	if(nrhs>1) {
-        if (mxGetNumberOfElements(prhs[1]) && mxIsNumeric(prhs[1])) {
+        if (!strcmp("thre",commande)) {
+            mkl_domain_set_num_threads(*(int*)mxGetData(prhs[1]),MKL_DOMAIN_PARDISO);
+            return;
+        } else if (mxGetNumberOfElements(prhs[1]) && mxIsNumeric(prhs[1])) {
             int id = (int)*((double*)mxGetPr(prhs[1]));
             int b = p_ss->set_active(id);
             if (b==0) mexErrMsgTxt("Factor does not exist");

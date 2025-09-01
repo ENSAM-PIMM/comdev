@@ -476,6 +476,10 @@ if r3(1)>0  %if ~isempty(getenv('MKL_PARDISO_OOC_MAX_CORE_SIZE'))
  setenv('MKL_PARDISO_OOC_MAX_SWAP_SIZE','0')
  setenv('MKL_PARDISO_OOC_KEEP_FILE','1')
  r1.param(60)=r3(1); % xxx
+else
+ %setenv('MKL_NUM_THREADS',num2str(maxNumCompThreads));
+ %setenv('OMP_NUM_THREADS',num2str(maxNumCompThreads));
+ try;mklserv_client('thre',int32(maxNumCompThreads));end
 end
 %r1.param([11 13 34 2 24 25 3])=[1 2 1 2 1 1 24];% check identical results
 %r1.param([34 2 24 25 3])=[ 1 2 1 1 24];% check identical results
@@ -601,8 +605,9 @@ else % remote implement
  if RO.msglvl;mklserv_client('sout',serv);end
 end
 if r1.param(67)||RO.msglvl
-    [a,b]=mklserv_client('geti',serv);%,r1.param);
-    fprintf('Fact : %i %i ms, npiv=%i,Mem%i kb\n',b(69:70)*1000,b(14:15))
+   [a,b]=mklserv_client('geti',serv);%,r1.param);
+   sdtu.logger.entry(struct('message',sprintf('Fact : %i %i ms, npiv=%i, Mem%.0f Mb', ...
+       b(69:70)*1000,b(14),b(15)/1024),'type','diag'));   
     if r1.param(67)==2; ret=mklserv_client('setp',serv,[66 0]); end%
     % 22 number of pos eig, 23 number of neg eig
     sp_util('setinput',r1.param,b(1:64),zeros(1));
