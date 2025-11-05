@@ -466,7 +466,8 @@ function out=mklserv_fact(k,ks,method,varargin) %#ok<INUSL>
 r1=method.param;
 serv=r1.Server;if length(r1)~=1; error('Inconsistent server entry');end
 r2=r1.param;
-r1.param=mklserv_utils('defparam');
+r1.param=mklserv_utils('defparam'); 
+method.param.param=r1.param;
 i1=67; i1=[3 52 60 67];
 r1.param(i1)=r2(i1);% msglvl
 r3=sdtdef('MklServOOC-safe',[0 10000]);
@@ -604,8 +605,13 @@ else % remote implement
  end
  if RO.msglvl;mklserv_client('sout',serv);end
 end
+
+% always propagate to allow external recovery of parameters
+[a,b]=mklserv_client('geti',serv);%,r1.param);
+sp_util('setinput',method.param.param,b(1:64),zeros(1));
+method.param.stats=[b(16)/1024 max(b(15),b(16)+b(17))/1024 (b(69)+b(70))*1000];
 if r1.param(67)||RO.msglvl
-   [a,b]=mklserv_client('geti',serv);%,r1.param);
+   %[a,b]=mklserv_client('geti',serv);%,r1.param);
    sdtu.logger.entry(struct('message',sprintf('Fact : %i %i ms, npiv=%i, Mem%.0f Mb', ...
        b(69:70)*1000,b(14),b(15)/1024),'type','diag'));   
     if r1.param(67)==2; ret=mklserv_client('setp',serv,[66 0]); end%
