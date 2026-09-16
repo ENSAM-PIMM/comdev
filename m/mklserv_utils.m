@@ -478,9 +478,11 @@ if r3(1)>0  %if ~isempty(getenv('MKL_PARDISO_OOC_MAX_CORE_SIZE'))
  setenv('MKL_PARDISO_OOC_KEEP_FILE','1')
  r1.param(60)=r3(1); % xxx
 else
- %setenv('MKL_NUM_THREADS',num2str(maxNumCompThreads));
- %setenv('OMP_NUM_THREADS',num2str(maxNumCompThreads));
- try;mklserv_client('thre',int32(maxNumCompThreads));end
+ if sdtkey('isdev')&&isunix
+  setenv('MKL_NUM_THREADS',num2str(maxNumCompThreads));
+  setenv('OMP_NUM_THREADS',num2str(maxNumCompThreads));
+ else;try;mklserv_client('thre',int32(maxNumCompThreads));end
+ end
 end
 %r1.param([11 13 34 2 24 25 3])=[1 2 1 2 1 1 24];% check identical results
 %r1.param([34 2 24 25 3])=[ 1 2 1 1 24];% check identical results
